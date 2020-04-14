@@ -1,0 +1,19 @@
+version:                              '3'
+
+services:
+  jenkins:
+    build:
+      context:                        ./zend
+      dockerfile:                     Dockerfile
+    image:                            zend/test-automation-jenkins
+    container_name:                   zjenkins
+    restart:  unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./.volume/apps:/apps
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
